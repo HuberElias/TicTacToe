@@ -1,9 +1,11 @@
 # Imports
 import os
 from random import randrange
+from time import sleep
 from tkinter import *
 from PIL import Image, ImageTk
 from pygame import mixer
+from threading import Thread
 mixer.init()
 
 # Classes
@@ -24,7 +26,7 @@ class TTT_Button:
 
     
     def disabled(self):
-        mixer.music.load("./sounds/gnome-sound-effect.mp3")
+        mixer.music.load(not_pressable_sounds[randrange(0, len(not_pressable_sounds))])
         mixer.music.play()
     
 
@@ -47,17 +49,36 @@ player = True  # True = X / False = O
 forms = ("O", "X", "Draw!")
 win_message = None
 won = False
+draw_sounds = ["./sounds/poop-sound-effect.mp3",
+               "./sounds/god dahm -meme sound effect.mp3",
+               "./sounds/Spongebob Fail Sound Effect Download.mp3",
+               "./sounds/Microsoft Windows XP Shutdown + Error - Sound Effect.mp3",
+               "./sounds/Fortnite dead sound effect.mp3",
+               "./sounds/Deez Nuts _Sound Effect_.mp3"]
 win_sounds = ["./sounds/mem-yippee-meme-sound.mp3",
               "./sounds/Super Mario Power Up Sound Effect.mp3",
               "./sounds/Ok I Pull Up Sound Effect.mp3",
               "./sounds/Okay let's go meme sound.mp3",
               "./sounds/Travis Scott Meme Sound Effect.mp3",
-              "./sounds/monke  sound effect.mp3",
+              "./sounds/hehehe ha.mp3",
               "./sounds/Moai sound.mp3.mp3",
-              "./sounds/sound-effect-hd.mp3"]
+              "./sounds/sound-effect-hd.mp3",
+              "./sounds/Siuuu! Cristiano Ronaldo - Sound Effect.mp3"]
+press_sounds = ["./sounds/the-rock-eyebrow-raise-sound-effect.mp3"]
+not_pressable_sounds = ["./sounds/Minecraft_ Villager Sound Effect.mp3",
+                        "./sounds/gnome-sound-effect.mp3"]
+restart_sounds = ["./sounds/Pump Shotgun Sound Effect.mp3",
+                  "./sounds/echo-fart-sound-effect-no-copyright.mp3"]
 
 
 # Functions
+def handle_close(root: Tk):
+    mixer.music.load("./sounds/Emoji Scream.mp3")
+    mixer.music.play()
+    sleep(1)
+    root.destroy()
+
+
 def check_draw():
     global won
     global field
@@ -75,7 +96,7 @@ def handle_restart(root):
     global field
     global won
     won = False
-    mixer.music.load("./sounds/echo-fart-sound-effect-no-copyright.mp3")
+    mixer.music.load(restart_sounds[randrange(0, len(restart_sounds))])
     mixer.music.play()
     for liste in field:
         for btn in liste:
@@ -106,11 +127,11 @@ def win(form):
         win_message.grid(columnspan=3, row=1)
     if form == 2:
         win_message.config(text=forms[form])
-        mixer.music.load("./sounds/poop-sound-effect.mp3")
+        mixer.music.load(draw_sounds[randrange(0, len(draw_sounds))])
         mixer.music.play()
     else:
         win_message.config(text=f"{forms[form]} wins!")
-        mixer.music.load(win_sounds[randrange(0, len(win_sounds)-1)])
+        mixer.music.load(win_sounds[randrange(0, len(win_sounds))])
         mixer.music.play()
 
 
@@ -168,7 +189,7 @@ def create_field(root):
 
 def btn_on_press(self: TTT_Button):
     global player
-    mixer.music.load("./sounds/the-rock-eyebrow-raise-sound-effect.mp3")
+    mixer.music.load(press_sounds[randrange(0, len(press_sounds))])
     mixer.music.play()
     self.change_image()
     self.form = player
@@ -189,5 +210,8 @@ create_field(root)
 
 restart = Button(root, text="Restart", width=11, font=("Ariabl", 25, "bold"), command=lambda: handle_restart(root))
 restart.grid(columnspan=3, row=3, pady=(15, 0))
+
+close = Button(root, text="Close", width=11, font=("Ariabl", 25, "bold"), command=lambda: handle_close(root))
+close.grid(columnspan=3, row=4, pady=(15, 0))
 
 root.mainloop()
