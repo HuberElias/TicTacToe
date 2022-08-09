@@ -1,6 +1,6 @@
 # Imports
 import os
-from random import randint, randrange
+from random import randrange
 from tkinter import *
 from PIL import Image, ImageTk
 from pygame import mixer
@@ -51,9 +51,10 @@ win_sounds = ["./sounds/mem-yippee-meme-sound.mp3",
               "./sounds/Super Mario Power Up Sound Effect.mp3",
               "./sounds/Ok I Pull Up Sound Effect.mp3",
               "./sounds/Okay let's go meme sound.mp3",
-              "./sounds/Travis Scott Sound Effect.mp3",
-              "./sounds/monke meme - sound effect.mp3",
-              "./sounds/Moai sound.mp3.mp3"]
+              "./sounds/Travis Scott Meme Sound Effect.mp3",
+              "./sounds/monke  sound effect.mp3",
+              "./sounds/Moai sound.mp3.mp3",
+              "./sounds/sound-effect-hd.mp3"]
 
 
 # Functions
@@ -109,7 +110,7 @@ def win(form):
         mixer.music.play()
     else:
         win_message.config(text=f"{forms[form]} wins!")
-        mixer.music.load(win_sounds[randrange(0, len(win_sounds))])
+        mixer.music.load(win_sounds[randrange(0, len(win_sounds)-1)])
         mixer.music.play()
 
 
