@@ -64,7 +64,9 @@ win_sounds = ["./sounds/mem-yippee-meme-sound.mp3",
               "./sounds/Moai sound.mp3.mp3",
               "./sounds/sound-effect-hd.mp3",
               "./sounds/Siuuu! Cristiano Ronaldo - Sound Effect.mp3"]
-press_sounds = ["./sounds/the-rock-eyebrow-raise-sound-effect.mp3"]
+press_sounds = ["./sounds/the-rock-eyebrow-raise-sound-effect.mp3",
+                "./sounds/Vine Boom - Sound Effect _copyrightfree.mp3",
+                "./sounds/Bass Drop Meme Sound Effect.mp3"]
 not_pressable_sounds = ["./sounds/Minecraft_ Villager Sound Effect.mp3",
                         "./sounds/gnome-sound-effect.mp3"]
 restart_sounds = ["./sounds/Pump Shotgun Sound Effect.mp3",
