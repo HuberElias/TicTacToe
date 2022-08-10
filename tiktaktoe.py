@@ -5,7 +5,8 @@ from time import sleep
 from tkinter import *
 from PIL import Image, ImageTk
 from pygame import mixer
-from threading import Thread
+from itertools import count, cycle
+
 mixer.init()
 
 # Classes
@@ -49,6 +50,8 @@ player = True  # True = X / False = O
 forms = ("O", "X", "Draw!")
 win_message = None
 won = False
+#frameCnt = 24
+#frames = [PhotoImage(file="./images/konfetti.gif",format = 'gif -index %i' %(i)) for i in range(frameCnt)]
 draw_sounds = ["./sounds/poop-sound-effect.mp3",
                "./sounds/god dahm -meme sound effect.mp3",
                "./sounds/Spongebob Fail Sound Effect Download.mp3",
@@ -115,6 +118,7 @@ def win(form):
     global win_message
     global forms
     global win_sounds
+    global root
 
     # disable buttons
     for liste in field:
