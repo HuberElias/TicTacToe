@@ -5,7 +5,6 @@ from time import sleep
 from tkinter import *
 from PIL import Image, ImageTk
 from pygame import mixer
-from itertools import count, cycle
 
 mixer.init()
 
@@ -27,8 +26,7 @@ class TTT_Button:
 
     
     def disabled(self):
-        mixer.music.load(not_pressable_sounds[randrange(0, len(not_pressable_sounds))])
-        mixer.music.play()
+        mixer.Channel(0).play(mixer.Sound(not_pressable_sounds[randrange(0, len(not_pressable_sounds))]))
     
 
     def after_win(self):
@@ -74,12 +72,18 @@ not_pressable_sounds = ["./sounds/Minecraft_ Villager Sound Effect.mp3",
                         "./sounds/gnome-sound-effect.mp3"]
 restart_sounds = ["./sounds/Pump Shotgun Sound Effect.mp3",
                   "./sounds/echo-fart-sound-effect-no-copyright.mp3"]
+bg_sounds = ["./sounds/fortnite-og-remix-lobby-music-10-hours.mp3",
+             "./sounds/full-classic-soundtrack.mp3"]
 
 
 # Functions
+def bg_music():
+    mixer.Channel(2).play(mixer.Sound(bg_sounds[randrange(0, len(bg_sounds))]))
+    root.after(600000, bg_music)
+
+
 def handle_close(root: Tk):
-    mixer.music.load("./sounds/Emoji Scream.mp3")
-    mixer.music.play()
+    mixer.Channel(0).play(mixer.Sound("./sounds/Emoji Scream.mp3"))
     sleep(1)
     root.destroy()
 
@@ -101,8 +105,7 @@ def handle_restart(root):
     global field
     global won
     won = False
-    mixer.music.load(restart_sounds[randrange(0, len(restart_sounds))])
-    mixer.music.play()
+    mixer.Channel(0).play(mixer.Sound(restart_sounds[randrange(0, len(restart_sounds))]))
     for liste in field:
         for btn in liste:
             btn.destroy()
@@ -133,12 +136,10 @@ def win(form):
         win_message.grid(columnspan=3, row=1)
     if form == 2:
         win_message.config(text=forms[form])
-        mixer.music.load(draw_sounds[randrange(0, len(draw_sounds))])
-        mixer.music.play()
+        mixer.Channel(0).play(mixer.Sound(draw_sounds[randrange(0, len(draw_sounds))]))
     else:
         win_message.config(text=f"{forms[form]} wins!")
-        mixer.music.load(win_sounds[randrange(0, len(win_sounds))])
-        mixer.music.play()
+        mixer.Channel(0).play(mixer.Sound(win_sounds[randrange(0, len(win_sounds))]))
 
 
 def win_condition():
@@ -195,8 +196,7 @@ def create_field(root):
 
 def btn_on_press(self: TTT_Button):
     global player
-    mixer.music.load(press_sounds[randrange(0, len(press_sounds))])
-    mixer.music.play()
+    mixer.Channel(player).play(mixer.Sound(press_sounds[randrange(0, len(press_sounds))]))
     self.change_image()
     self.form = player
     self.btn.config(command=self.disabled)  # comment out this line for fun
@@ -210,6 +210,8 @@ root = Tk()
 root.title("TikTakToe")
 root.resizable(False, False)
 root.config(bg="black", padx=20, pady=20)
+mixer.Channel(3).play(mixer.Sound("./sounds/Pornhub Intro.mp3"))
+bg_music()
 os.system("CLS")
 
 create_field(root)
