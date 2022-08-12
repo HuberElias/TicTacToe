@@ -48,8 +48,6 @@ player = True  # True = X / False = O
 forms = ("O", "X", "Draw!")
 win_message = None
 won = False
-#frameCnt = 24
-#frames = [PhotoImage(file="./images/konfetti.gif",format = 'gif -index %i' %(i)) for i in range(frameCnt)]
 draw_sounds = ["./sounds/poop-sound-effect.mp3",
                "./sounds/god dahm -meme sound effect.mp3",
                "./sounds/Spongebob Fail Sound Effect Download.mp3",
