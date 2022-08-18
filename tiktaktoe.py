@@ -194,7 +194,7 @@ def create_field(root):
 
 def btn_on_press(self: TTT_Button):
     global player
-    mixer.Channel(player).play(mixer.Sound(press_sounds[randrange(0, len(press_sounds))]))
+    mixer.Channel(player).play(mixer.Sound(press_sounds[randrange(0, len(press_sounds))])) 
     self.change_image()
     self.form = player
     self.btn.config(command=self.disabled)  # comment out this line for fun
